@@ -3,8 +3,8 @@
  #define DHTPIN 9   
  #define DHTTYPE DHT11   // DHT 22  (AM2302)
 DHT dht(DHTPIN, DHTTYPE);
-float h;
-float t;
+int h;
+int t;
 float uvindex=0;          /****** UV ******/ 
 float CO, COV, OZON,HS;     /****** GASES ******/ 
 float MP;                   /****** MP ******/
@@ -25,11 +25,11 @@ int circ=22, heat=23, alert=6;   /****** LEDS ******/
  
  /***** MODULO GPS ******/ 
       
-SoftwareSerial GPS(3, 2); // RX, TX
+SoftwareSerial GPS(2, 3); // RX, TX
       
 #include "TinyGPS.h"
 TinyGPS gps;
-     
+    
 #define GPS_TX_DIGITAL_OUT_PIN 2
 #define GPS_RX_DIGITAL_OUT_PIN 3
  #define MAX_BUFFER 500
@@ -51,11 +51,16 @@ void setup() {
   
 Serial.begin(19200);  //Configuracion de puerto serial por hardware en bps(baudios por segundo)
 sim800l.begin(19200); //Configuracion de puerto serial del modulo (baudios por segundo)
+GPS.begin(9600); //Configuracion de puerto serial del modulo (baudios por segundo)
+
 Serial.println("Iniciando configuracion del modulo GSM"); 
 sim800l.println(F("AT"));
 delay(500);
 Serial.println(debug());
 sim800l.println(F("AT+CBC"));  //Retorna el estado de la bateria del dispositivo, el % y milivol
+delay(500);
+Serial.println(debug());
+sim800l.println(F("AT+IPR=19200"));  //Retorna el estado de la bateria del dispositivo, el % y milivol
 delay(500);
 Serial.println(debug());
 
@@ -70,9 +75,8 @@ Serial.println(debug());
        pinMode(alert, OUTPUT);       
 configuracionGPRS();
 Serial.print("Configuracion finalizada.\r\n");
-enviardatos();
-Serial.print("Envio de datos finalizado.\r\n");
-  
+//enviardatos();
+
 }
 
 // the loop function runs over and over again forever
@@ -86,7 +90,9 @@ GetCO();
 GetCOV();    
 GetHS();
 GetGPS();
-
+enviardatos();
+//Serial.print("Envio de datos finalizado.\r\n");
+  
 }
 
 
@@ -127,7 +133,7 @@ void GetUV() {
   //Use the 3.3V power pin as a reference to get a very accurate output value from sensor
   float outputVoltage = 3.3 / refLevel * uvLevel;
   
-  float uvIntensity = mapfloat(outputVoltage, 0.99, 2.9, 0.0, 15.0);
+volatile  float uvIntensity = mapfloat(outputVoltage, 0.99, 2.9, 0.0, 15.0);
 
 //  Serial.print("Nivel MP8511:");
 //  Serial.print(uvLevel);
@@ -139,9 +145,9 @@ void GetUV() {
 //  Serial.print("\n ");
   Serial.print("Intensidad (mW/cm^2): ");
   Serial.print(uvIntensity);
-  delay(1000);
+  delay(500);
   Serial.print("\n ");
-  delay(1000);
+  delay(500);
        }
        
        
@@ -150,27 +156,27 @@ void GetCO() {     //MQ 7 Sensor de calidad de aire , idenfica cantidad de monox
      float val1 = analogRead(A3);
      CO = val1 * (5.0 / 1023.0);
      Serial.print("CO:");
-     delay(1000);  
+     delay(500);  
      Serial.println(CO);      
-     delay(1000);  
+     delay(500);  
        }
        
 void GetCOV() {    //MQ 135 control de calidad de aire
      float val3 = analogRead(A4);
      COV = val3 * (5.0 / 1023.0); 
      Serial.print("COV:");
-     delay(1000);  
+     delay(500);  
      Serial.println(COV);      
-     delay(1000);  
+     delay(500);  
        
        }
 void GetOzono() {    //MQ 135
      float val4 = analogRead(A5);
      OZON = val4 * (5.0 / 1023.0); 
      Serial.print("Ozono:");
-     delay(1000);  
+     delay(500);  
      Serial.println(OZON);      
-     delay(1000);  
+     delay(500);  
        
        }  
 
@@ -233,44 +239,51 @@ sim800l.println(F("AT+CIPMUX=0")); //Esta la conexión en modo simple(udp/tcp cl
 Serial.println(debug());
 delay(500);
 
-}     
-
-void enviardatos() {  //Se acitva si el peso se encuentra en un limite definido
-sim800l.println(F("AT+CIPSHUT")); //Resetea las direcciones IP
-Serial.println(debug());
-delay(500);
 // Configurar tarea y configura el APN
 sim800l.println(F("AT+CSTT=\"internet.comcel.com.co\",\"COMCELWEB\",\"COMCELWEB\""));
 Serial.println(debug());
 delay(500);
 
-sim800l.println(F("AT+ CIICR")); // Levantar conexión wireless(GPRS o CSD)
+sim800l.println(F("AT+CIICR")); // Levantar conexión wireless(GPRS o CSD)
 Serial.println(debug());
 delay(500);
 
-sim800l.println(F("AT+CIFSR")); // Obtiene una dirección IP
+
+}     
+
+void enviardatos() {  //Se acitva si el peso se encuentra en un limite definido
+//sim800l.println(F("AT+CIPSHUT")); //Resetea las direcciones IP
+//Serial.println(debug());
+//delay(500);
+sim800l.println("AT+CIFSR"); // Obtiene una dirección IP
 Serial.println(debug());
-delay(500);
+delay(2000);
 
 sim800l.println(F("AT+CIPSTART=\"TCP\",\"107.170.208.9\",\"80\"")); //Inicia conexión UDP o TCP
 Serial.println(debug());
-delay(2200);
+delay(2000);
 
-sim800l.println(F("AT+CIPSEND")); // Envia datos al servidor remoto, ctlr+z o 0x1A,
+sim800l.println(F("AT+CIPSEND\r\n")); // Envia datos al servidor remoto, ctlr+z o 0x1A,
 //verifica que los datos salieron del puerto serial pero no indica si llegaron al servidor UDP
 Serial.println(debug());
 delay(500);
-sim800l.println(F("GET /variables.php?temp=20&hum=20&ozon=20&uv=100&uv=10&co=20&hs=30&cov=25&hs=90")); 
+//sim800l.println("GET /dato.php?temp="+ String(t)+"&hum="+ String(h)+"&uv="+ String(t)+"&co="+ String(CO)+"&cov="+ String(COV)+"&hs="+ String(HS)+"&gpslat="+String(latitude)+"&gpslog="+ String(longitude)); 
+sim800l.println("GET /index.php?data=N0FIQXVGSnFZMWF6WUx3VkVMbnhRYjhRZE1uNXRTY3JpOGVQTUVobEtRMWlPYmo4TVdzMENwMTROaWloUnllOGNDeW8wZjhwWm1lN29Fc1I1QmprbHk4bFhBPT0&id_dispositivo=1&temp="+ String(t)+"&hum="+ String(h)+"&uv="+ String(t)+"&co="+ String(CO)+"&cov="+ String(COV)+"&hs="+ String(HS)+"&gpslat="+String(latitude)+"&gpslog="+ String(longitude)); 
+
+//+"&co="+ String(CO)+"&cov="+ String(COV)+"&hs="+ String(HS)
+//sim800l.println("GET /dato.php?temp="+ String(t)+"&hum="+ String(h)); 
+//sim800l.println(F("GET /dato.php?temp=200&hum=200&ozon=100&uv=100")); 
 // Se envia por un peticion GET los valores obtenidos
-Serial.println(debug());
-delay(500);
-sim800l.println(F("\r\n")); //Envia un salto de linea
-sim800l.println(F("\x1A"));//ctlr+z para finalizar el envio o 0x1A
+//Serial.println(debug());
+//delay(500);
+pushSlow("\r\n",100,100); //Envia un salto de linea
+pushSlow("\x1A",100,100);//ctlr+z para finalizar el envio o 0x1A
+//sim800l.write(0x1A);//ctlr+z para finalizar el envio o 0x1A
 Serial.println(debug());
 delay(500);
 sim800l.println(F("AT+CIPSHUT")); //Resetea las direcciones IP
 Serial.println(debug());
-delay(500);
+delay(4000);
 //pesomin=0;
 }
 
@@ -300,7 +313,7 @@ if (newData) {
 unsigned long age;
 gps.f_get_position(&latitude, &longitude, &age);       
         
-Serial.print("Location: ");
+Serial.print("Localizacion: ");
 Serial.print(latitude, 6);
 Serial.print(" , ");
 Serial.print(longitude, 6);
@@ -310,8 +323,20 @@ Serial.println("");
         
 dtostrf(latitude, 6, 6, latit); 
 dtostrf(longitude, 6, 6, longi);
-Serial.println(latit);
-Serial.println(longi);
+//Serial.println(latit);
+//Serial.println(longi);
         
       
   }
+   // Envia datos por el SoftSerial
+// lentamente
+void pushSlow(char* command,int charaterDelay,int endLineDelay) {
+  for(int i=0; i<strlen(command); i++) {
+    sim800l.write(command[i]);
+    if(command[i]=='\n') {
+      delay(endLineDelay);
+    } else {
+      delay(charaterDelay);
+    }
+  }
+} 
