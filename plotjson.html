@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Monitoreo de variables ambientales</h2>
+
+<p id="demo"></p>
+
+<script>
+var text = '{"datos":[' +
+'{"0":"200","temperatura":"20","humedad_relativa":"200","2":null,"nivel_ozono":null,"3":"100","radiacion_uv":"100","4":"300","dioxido_carbono":"300","5":"300","calidad_aire":"300","6":"300","humedad_suelo":"300","7":"232","latitud":"232","8":"4.64","longitud":"-74.07" },' +
+'{"0":"Anna","temperatura":"20" ,"humedad_relativa":"200","2":null,"nivel_ozono":null,"3":"100","radiacion_uv":"100","4":"300","dioxido_carbono":"300","5":"300","calidad_aire":"300","6":"300","humedad_suelo":"300","7":"232","latitud":"232","8":"4.64","longitud":"-74.07"},' +
+'{"0":"Peter","temperatura":"20" ,"humedad_relativa":"200","2":null,"nivel_ozono":null,"3":"100","radiacion_uv":"100","4":"300","dioxido_carbono":"300","5":"300","calidad_aire":"300","6":"300","humedad_suelo":"300","7":"232","latitud":"4.04","8":"4.64","longitud":"-74.07"}]}';
+
+//var datos = '{"datos":['+
+//'{"0":"200","temperatura":"200","1":"200","humedad_relativa":"200","2":null,"nivel_ozono":null,"3":"100","radiacion_uv":"100","4":"300","dioxido_carbono":"300","5":"300","calidad_aire":"300","6":"300","humedad_suelo":"300","7":"232","latitud":"232","8":"232","longitud":"232"},'+
+//'{"0":"20","temperatura":"20","1":"40","humedad_relativa":"40","2":null,"nivel_ozono":null,"3":"20","radiacion_uv":"20","4":"0","dioxido_carbono":"0","5":"0.92","calidad_aire":"0.92","6":"5","humedad_suelo":"5","7":"4.64","latitud":"4.64","8":"-74.07","longitud":"-74.07"},'+
+//'{"0":"20","temperatura":"20","1":"39","humedad_relativa":"39","2":null,"nivel_ozono":null,"3":"20","radiacion_uv":"20","4":"0","dioxido_carbono":"0","5":"0.91","calidad_aire":"0.91","6":"5","humedad_suelo":"5","7":"4.64","latitud":"4.64","8":"-74.07","longitud":"-74.07"},'+
+//'{"0":"20","temperatura":"20","1":"40","humedad_relativa":"40","2":null,"nivel_ozono":null,"3":"20","radiacion_uv":"20","4":"0","dioxido_carbono":"0","5":"0.91","calidad_aire":"0.91","6":"5","humedad_suelo":"5","7":"4.64","latitud":"4.64","8":"-74.07","longitud":"-74.07"},'+
+//'{"0":"20","temperatura":"20","1":"40","humedad_relativa":"40","2":null,"nivel_ozono":null,"3":"20","radiacion_uv":"20","4":"0","dioxido_carbono":"0","5":"0.91","calidad_aire":"0.91","6":"5","humedad_suelo":"5","7":"4.64","latitud":"4.64","8":"-74.07","longitud":"-74.07"}]}';
+
+
+obj = JSON.parse(text);
+
+document.getElementById("demo").innerHTML =
+//"Las variables ambientales son temperatura:"+obj.datos[2].temperatura+"humedad"+obj.datos[2].humedad_relativa+"radiacion"+obj.datos[2].radiacion_uv+"dioxido de carbono"+obj.datos[2].dioxido_carbono+"calidad de aire"+obj.datos[2].calidad_aire+"humedad del suelo"+obj.datos[2].humedad_suelo+"longitud"+obj.datos[2].longitud+"latitud"+obj.datos[2].latitud;
+
+"Las coordenas georeferenciadas son longitud "+obj.datos[2].longitud+" con latitud "+obj.datos[2].latitud;
+
+//obj.employees[2].firstName + " " + obj.employees[2].lastName;
+
+</script>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+
+
+
+
+</script>
+
+
+
+<script> 
+temperaturas=[];
+humedades=[];
+monoxidos=[];
+radiaciones=[];
+calidades=[];
+suelos=[];
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: "/index.php?data=c1FJdWErVldhbFlkY2RkOGxlbzE5a0JZTmlLNFZPVTVNQlRHZ2hjU3Q1NDhxbktneGtib3d1NXY0d3RsTnE5eklCcHB2OEVaUnQvZ2ZoR0RvWXgvN1JKaTVBPT0&limit=12"
+    })
+    .done(function (msg) {
+        respuesta = msg;
+     dato = JSON.parse(msg);
+     
+        for (var i = 0; i < dato.length; i++) {
+			temperaturas.push(parseInt(dato[i].temperatura));
+          //  console.log(dato[i].temperatura);
+            
+        }
+        
+       // console.log(dato[i].humedad_relativa);
+         for (var i = 0; i < dato.length; i++) {
+			humedades.push(parseInt(dato[i].humedad_relativa));
+          //  console.log(dato[i].humedad_relativa);
+            
+        }
+        
+       // console.log(temperaturas);
+       
+        for (var i = 0; i < dato.length; i++) {
+			monoxidos.push(parseInt(dato[i].dioxido_carbono));
+           // console.log(dato[i].dioxido_carbono);
+            
+        }
+        
+        for (var i = 0; i < dato.length; i++) {
+			radiaciones.push(parseInt(dato[i].radiacion_uv));
+         //   console.log(dato[i].radiacion_uv);
+            
+        }
+        
+         for (var i = 0; i < dato.length; i++) {
+			calidades.push(parseInt(dato[i].calidad_aire));
+          //  console.log(dato[i].calidad_aire);
+            
+        }
+        
+         for (var i = 0; i < dato.length; i++) {
+			suelos.push(parseInt(dato[i].humedad_suelo));
+          //  console.log(dato[i].humedad_suelo);
+            
+        }
+        
+       
+        
+        $('#container').highcharts({
+        title: {
+            text: 'Estacion meteorologica de datos',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Fuente: Datos de Diciembre de la ecohackatoon',
+            x: -20
+        },
+        xAxis: {
+            categories: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6',
+                'Semana 7', 'Semana 8', 'Semana 9', 'Semana 10', 'Semana 11', 'Semana 12']
+        },
+        yAxis: {
+            title: {
+                text: 'Nivel de conversion'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Temperatura',
+            data: temperaturas
+        }, {
+            name: 'Humedad',
+            data: humedades
+        }, {
+            name: 'Monoxido de carbono',
+            data: monoxidos
+        },{
+            name: 'Radiacion UV',
+
+            data: radiaciones
+        },  {
+            name: 'Calidad de aire',
+
+            data: calidades
+        }, {
+            name: 'Humedad del suelo',
+            data: suelos
+        }]
+    });
+       
+    });
+
+
+//console.log(temperaturas);
+    
+
+
+});
+
+ </script>
+
+</body>
+</html>
