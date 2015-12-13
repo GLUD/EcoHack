@@ -1,6 +1,6 @@
 		<header>
 			<div id="tabudistrital">
-				<a href="#">Logo</a>
+				<a href="#">logo</a>
 			</div>
 		</header>
 		<div style="opacity: 1;" class="fade-in-forward" id="stage">

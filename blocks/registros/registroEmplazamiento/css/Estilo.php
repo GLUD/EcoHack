@@ -16,7 +16,7 @@ echo '<!-- Latest compiled and minified CSS -->
 echo '<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />';
 
 $estilo = array();
-$estilo [$indice++] = "style.css";
+$estilo [$indice++] = "styler.css";
 //$estilo = array();
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );

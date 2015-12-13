@@ -1,5 +1,28 @@
+<header>
+			<div id="tabudistrital1">
+				<a href="#">Logo</a>
+			</div>
+		<div id="tabudistrital">
+				<a href="#">Logo</a>
+			</div>
+		</header>
+		
+		<div style="opacity: 1;" class="fade-in-forward" id="stage">
+			<div class="sign-in">
+				<div id="main-content" class="card">
+					
+					<div style="opacity: 1;" class="fade-in-forward" id="udistrital-logo"></div>
+					
+					<header>
+						<h1 id="fxa-signin-header">
+							Red de Monitoreo de Condiciones Ambientales <span class="service">Ingrese sus datos</span></h1>
+					</header>
+							<section>
+
+
+
 <?php
-namespace registros\registroUsuario\formulario;
+//namespace registros\registroUsuario\formulario;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
@@ -456,3 +479,12 @@ $miFormulario = new FormularioRegistro ( $this->lenguaje, $this->miFormulario, $
 $miFormulario->formulario ();
 $miFormulario->mensaje ();
 ?>
+
+
+
+	</section>
+		</div>
+		<!--[if !(IE) | (gte IE 10)]><!-->
+		<noscript>
+			SGA necesita Javascript.
+		</noscript>

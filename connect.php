@@ -3,8 +3,8 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "grupoglud=";
-$dbname = "ecohackatoon";
+$password = "xxxxxxx";
+$dbname = "xxxxxxx";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname);
