@@ -55,8 +55,8 @@ class Funcion {
 				case 'registrarDatos' :
 					include ($this->ruta.'/funcion/RegistrarDatos.php');
 					break;
-				case 'login' :
-					include ($this->ruta.'/funcion/Login.php');
+				case 'consultarDatos' :
+					include ($this->ruta.'/funcion/ConsultarDatos.php');
 					break;
 			}
 		} else {

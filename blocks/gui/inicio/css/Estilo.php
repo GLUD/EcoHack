@@ -1,4 +1,7 @@
 <?php
+
+echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
+echo '<meta name="viewport" content="width=device-width">';
 $indice = 0;
 
 $estilo = array();
@@ -18,4 +21,5 @@ if ($unBloque ["grupo"] == "") {
 foreach ( $estilo as $nombre ) {
 	echo "<link rel='stylesheet' type='text/css' href='" . $rutaBloque . "/css/" . $nombre . "'>\n";
 }
+
 ?>

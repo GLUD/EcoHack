@@ -5,6 +5,7 @@ $( document ).ready(init);
 
 function init(){
 	cargarEventosPanel();
+	ponerPlaceHolder();
 }
 
 function cargarEventosPanel(){
@@ -29,7 +30,11 @@ function abrirEventoPanelPorId(id){
 	$("#"+id).css("display","block");
 }
 
-
+function ponerPlaceHolder(){
+	$("input").each(function(){
+		$(this).attr("placeholder",$(this).attr("title"));
+	});
+}
 
 
 

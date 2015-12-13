@@ -867,6 +867,7 @@ html[dir="rtl"] .tooltip-below::before {
         border-radius: 2px;
         font-size: 16px;
         height: 40px;
+        padding-left: 10px;
     }
     .input-row .input-help {
         font-size: 12px;
@@ -1223,7 +1224,7 @@ input[type="text"] ~ .show-password:hover + .show-password-label {
 }
 .links {
     overflow: auto;
-    padding: 1px;
+    padding: 5px;
 }
 .links + .privacy-links {
     margin: 20px 0 15px;

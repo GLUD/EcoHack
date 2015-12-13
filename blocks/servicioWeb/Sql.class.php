@@ -109,25 +109,43 @@ class Sql extends \Sql {
 				$cadenaSql.=" id_dispositivo,";
 				$cadenaSql.=" temperatura,";
 				$cadenaSql.=" humedad_relativa,";
-				$cadenaSql.=" nivel_ozono,";
 				$cadenaSql.=" radiacion_uv,";
 				$cadenaSql.=" dioxido_carbono,";
 				$cadenaSql.=" calidad_aire,";
 				$cadenaSql.=" humedad_suelo,";
-				$cadenaSql.=" coordenada_geografica";
+				$cadenaSql.=" latitud,";
+				$cadenaSql.=" longitud";
 				$cadenaSql.=" )";
 				$cadenaSql.=" VALUES";
 				$cadenaSql.=" (";
 				$cadenaSql.=" '" . $variable ['id_dispositivo'] . "',";
 				$cadenaSql.=" '" . $variable ['temp'] . "',";
 				$cadenaSql.=" '" . $variable ['hum'] . "',";
-				$cadenaSql.=" '" . $variable ['ozon'] . "',";
 				$cadenaSql.=" '" . $variable ['uv'] . "',";
 				$cadenaSql.=" '" . $variable ['co'] . "',";
 				$cadenaSql.=" '" . $variable ['cov'] . "',";
 				$cadenaSql.=" '" . $variable ['hs'] . "',";
-				$cadenaSql.=" '" . $variable ['cg'] . "'";
+				$cadenaSql.=" '" . $variable ['gpslat'] . "',";
+				$cadenaSql.=" '" . $variable ['gpslog'] . "'";
 				$cadenaSql.=" );";
+				break;
+			
+			case 'consultarDatos' :
+				$cadenaSql=" SELECT";
+				$cadenaSql.=" temperatura AS temperatura,";
+				$cadenaSql.=" humedad_relativa AS humedad_relativa,";
+				$cadenaSql.=" nivel_ozono AS nivel_ozono,";
+				$cadenaSql.=" radiacion_uv AS radiacion_uv,";
+				$cadenaSql.=" dioxido_carbono AS dioxido_carbono,";
+				$cadenaSql.=" calidad_aire AS calidad_aire,";
+				$cadenaSql.=" humedad_suelo AS humedad_suelo,";
+				$cadenaSql.=" latitud AS latitud,";
+				$cadenaSql.=" longitud AS longitud";
+				$cadenaSql.=" FROM";
+				$cadenaSql.=" modelo.dato";
+				$cadenaSql.=" WHERE id_dispositivo='1'";
+				$cadenaSql.=" ORDER BY tiempo";
+				$cadenaSql.=" DESC LIMIT ".$variable ['limit'].";";
 				break;
 				
 			case "actualizarEvaluador" :

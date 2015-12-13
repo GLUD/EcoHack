@@ -104,6 +104,25 @@ class Sql extends \Sql {
 				$cadenaSql .= 'WHERE ';
 				$cadenaSql .= 'id_bloque>0';
 				break;
+				
+			case "buscarUsuario" :
+				$cadenaSql = 'SELECT ';
+				$cadenaSql .= 'id_usuario, ';
+				$cadenaSql .= 'nombre, ';
+				$cadenaSql .= 'apellido, ';
+				$cadenaSql .= 'correo, ';
+				$cadenaSql .= 'telefono, ';
+				$cadenaSql .= 'imagen, ';
+				$cadenaSql .= 'clave, ';
+				$cadenaSql .= 'tipo, ';
+				$cadenaSql .= 'estilo, ';
+				$cadenaSql .= 'idioma, ';
+				$cadenaSql .= 'estado ';
+				$cadenaSql .= 'FROM ';
+				$cadenaSql .= $prefijo . 'usuario ';
+				$cadenaSql .= "WHERE ";
+				$cadenaSql .= "nickname = '" . trim ( $variable ["usuario"] ) . "' ";
+				break;
 		}
 		
 		return $cadenaSql;

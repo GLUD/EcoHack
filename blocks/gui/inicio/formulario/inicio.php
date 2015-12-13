@@ -29,6 +29,19 @@ class Form {
 
 	function miForm() {
 		// Rescatar los datos de este bloque
+		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
+        // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
+        /**
+        * Atributos que deben ser aplicados a todos los controles de este formulario.
+        * Se utiliza un arreglo
+        * independiente debido a que los atributos individuales se reinician cada vez que se declara un campo.
+        *
+        * Si se utiliza esta técnica es necesario realizar un mezcla entre este arreglo y el específico en cada control:
+        * $atributos= array_merge($atributos,$atributosGlobales);
+        */
+        $atributosGlobales ['campoSeguro'] = 'tiempo';
+        $_REQUEST['tiempo']=time();
+		// Rescatar los datos de este bloque
 		include $this->site.'formulario/paginaInicio.html.php';
 	}
 
