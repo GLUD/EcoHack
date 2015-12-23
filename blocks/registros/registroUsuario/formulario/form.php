@@ -1,12 +1,4 @@
-<header>
-			<div id="tabudistrital1">
-				<a href="#">Logo</a>
-			</div>
-		<div id="tabudistrital">
-				<a href="#">Logo</a>
-			</div>
-		</header>
-		
+	
 		<div style="opacity: 1;" class="fade-in-forward" id="stage">
 			<div class="sign-in">
 				<div id="main-content" class="card">

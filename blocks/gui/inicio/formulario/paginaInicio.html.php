@@ -1,9 +1,10 @@
-		<header>
-			<div id="tabudistrital">
-				<a href="#">logo</a>
-			</div>
-		</header>
-		<div style="opacity: 1;" class="fade-in-forward" id="stage">
+		<div id="sliderFrame">
+        <div id="slider">
+            <img src="img/slid1.jpg" alt="" />
+            <img src="img/slid2.jpg" alt="Pure Javascript. No jQuery. No flash." />
+            <img src="img/slid3.jpg" alt="#htmlcaption" />
+            <img src="img/slid4.jpg" />
+        </div><div style="opacity: 1;" class="fade-in-forward" id="stage">
 			<div class="sign-in">
 				<div id="main-content" class="card">
 					
@@ -13,6 +14,9 @@
 						<h1 id="fxa-signin-header">
 							Red de Monitoreo de Condiciones Ambientales <span class="service">Ingrese sus datos</span></h1>
 					</header>
+				
+    
+					
 					
 					<section>
 
@@ -139,13 +143,21 @@
         $atributos ['marco'] = true;
         $atributos ['tipoEtiqueta'] = 'fin';
         echo $this->miFormulario->formulario ( $atributos );
+        
+        $directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+        $directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+        $directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+        
+        $enlace = 'pagina=registroUsuario';
+        $enlace = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $enlace, $directorio );
+        
 
 	?>
 
 						<div class="links">
 							<a href="/reset_password" class="left reset-password">¿Olvidaste la contraseña?</a>
 
-							<a href="/oauth/signup" class="right sign-up">Crear una cuenta</a>
+							<a href="<?php echo $enlace;?>" class="right sign-up">Crear una cuenta</a>
 						</div>
 
 						<div class="privacy-links">

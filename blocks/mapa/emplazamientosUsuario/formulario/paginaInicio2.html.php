@@ -1,9 +1,4 @@
 <div id='cssmenu'>
-<ul>
-   <li class='active'><a href='/index.php'><span>Mis emplazamientos</span></a></li>
-   <li><a href='#'><span>Otros</span></a></li>
-   <li class='last'><a href='#'><span>Acerca de</span></a></li>
-</ul>
 </div>
 
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />

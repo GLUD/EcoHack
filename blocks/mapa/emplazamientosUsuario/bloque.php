@@ -1,5 +1,5 @@
 <?php
-namespace gui\accesoIncorrecto;
+namespace gui\emplazamientosUsuario;
 // Evitar un acceso directo a este archivo
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
