@@ -36,42 +36,22 @@ class Funcion {
 	}
 	function redireccionar($opcion, $valor = "") {
 		include_once ($this->ruta . "/funcion/redireccionar.php");
-	}	
-	function agregarReportico() {
-		include_once ($this->ruta . "funcion/AgregarReportico.class.php");
-		
-		return $resultado;
-	}
-	function copiarArchivos() {
-		include_once ($this->ruta . "funcion/CopiarArchivos.class.php");
-	
-		return $resultado;
-	}	
-	function configurarArchivos() {
-		include_once ($this->ruta . "funcion/ConfigurarArchivos.class.php");
-	
-		return $resultado;
-	}
-	function registrarBloque() {
-		include_once ($this->ruta . "funcion/RegistradorBloque.class.php");
-	
-		return $resultado;
 	}
 	function procesarAjax() {
 		include_once ($this->ruta . "funcion/procesarAjax.php");
 	}
 	function action() {
 		$resultado = true;
-		
+
 		// Aquí se coloca el código que procesará los diferentes formularios que pertenecen al bloque
 		// aunque el código fuente puede ir directamente en este script, para facilitar el mantenimiento
 		// se recomienda que aqui solo sea el punto de entrada para incluir otros scripts que estarán
 		// en la carpeta funcion
-		
+
 		// Importante: Es adecuado que sea una variable llamada opcion o action la que guie el procesamiento:
-		
+
 		if (isset ( $_REQUEST ['opcion'] )) {
-			switch ($_REQUEST ['opcion']) {		
+			switch ($_REQUEST ['opcion']) {
 				case "logout" :
 					include ($this->ruta.'/funcion/Logout.php');
 					break;
@@ -83,21 +63,21 @@ class Funcion {
 			$_REQUEST ['opcion'] = "mostrar";
 			include_once ($this->ruta . "/funcion/formProcessor.php");
 		}
-		
+
 		return $resultado;
 	}
 	function __construct() {
 		$this->miConfigurador = \Configurador::singleton ();
-		
+
 		$this->ruta = $this->miConfigurador->getVariableConfiguracion ( "rutaBloque" );
-		
+
 		$this->miMensaje = \Mensaje::singleton ();
-		
+
 		$conexion = "aplicativo";
 		$this->miRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-		
+
 		if (! $this->miRecursoDB) {
-			
+
 			$this->miConfigurador->fabricaConexiones->setRecursoDB ( $conexion, "tabla" );
 			$this->miRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		}

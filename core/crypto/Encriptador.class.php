@@ -2,12 +2,12 @@
 
 /**
  * IMPORTANTE: La frase de seguridad predeterminada debe cambiarse antes instalar el aplicativo. Cambiarla después puede dejar
- * inservible la instalación si esta depende de variables codificadas con la clave anterior 
+ * inservible la instalación si esta depende de variables codificadas con la clave anterior
  * (p.e. si se guardaron datos codificados en la base de datos o en config.inc.php).
- * 
- * 
- * @todo Mejorar la clase para que acepte otras semillas. 
- * 
+ *
+ *
+ * @todo Mejorar la clase para que acepte otras semillas.
+ *
  */
 require_once ("aes.class.php");
 require_once ("aesctr.class.php");
@@ -17,7 +17,7 @@ class Encriptador {
 	private $iv;
 	//Se requiere una semilla de 16, 24 o 32 caracteres
 	const SEMILLA = '4n4ndS33dSGLUD=#$';
-	
+
 	// Constructor
 	function __construct($llave = '') {
 		if ($llave === '') {
@@ -26,7 +26,7 @@ class Encriptador {
 		} else {
 			$this->llave = $llave;
 		}
-		
+
 	}
 
 	public static function singleton() {
@@ -36,7 +36,7 @@ class Encriptador {
 		}
 		return self::$instance;
 	}
-	
+
 	function codificar($cadena) {
 		if (function_exists ( 'mcrypt_encrypt' )) {
 			$cadena = mcrypt_encrypt ( MCRYPT_RIJNDAEL_256, $this->llave, $cadena, MCRYPT_MODE_ECB ) ;
@@ -47,9 +47,9 @@ class Encriptador {
 		return $cadena;
 	}
 	
-	
+
 	function decodificar($cadena) {
-		
+
 		$cadena=$this->base64url_decode($cadena);
 		if (function_exists ( 'mcrypt_decrypt' )) {
 			$cadena =  mcrypt_decrypt ( MCRYPT_RIJNDAEL_256, $this->llave, $cadena , MCRYPT_MODE_ECB ) ;
@@ -59,15 +59,15 @@ class Encriptador {
 		$cadena=trim($cadena);
 		return $cadena;
 	}
-	
-	
-	
+
+
+
 	function codificar_url($cadena, $enlace = '') {
 		$cadena = $this->codificar ( $cadena );
-		
+
 		return $enlace . "=" . $cadena;
 	}
-	
+
 	/**
 	 *
 	 * Método para decodificar la cadena GET para obtener las variables de la petición
@@ -78,23 +78,23 @@ class Encriptador {
 	 */
 	function decodificar_url($cadena) {
 		$cadena = $this->decodificar ( $cadena );
-		
+
 		parse_str ( $cadena, $matriz );
-		
+
 		foreach ( $matriz as $clave => $valor ) {
 			$_REQUEST [$clave] = $valor;
 		}
-		
+
 		return true;
 	}
 	function codificarClave($cadena) {
 		return sha1 ( md5 ( $cadena ) );
 	}
-	
+
 	function base64url_encode($data) {
 		return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 	}
-	
+
 	function base64url_decode($data) {
 		return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
 	}

@@ -143,14 +143,14 @@ class FabricaDbConexion {
 		if (isset($this -> configuracion["dbprefijo"])) {
 
 			$cadenaSql = "SELECT ";
-			$cadenaSql .= 'nombre,  
-                           servidor as dbdns, 
-                           puerto as dbpuerto, 
-                           conexionssh as dbssl, 
-                           db as dbnombre, 
-                           esquema as dbesquema, 
-                           usuario as dbusuario, 
-                           password as dbclave, 
+			$cadenaSql .= 'nombre,
+                           servidor as dbdns,
+                           puerto as dbpuerto,
+                           conexionssh as dbssl,
+                           db as dbnombre,
+                           esquema as dbesquema,
+                           usuario as dbusuario,
+                           password as dbclave,
                            dbms as dbsys ';
 			$cadenaSql .= "FROM ";
 			$esquema = '';

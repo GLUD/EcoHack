@@ -1,23 +1,28 @@
+<?php
+$rutaUrlBloque = $this->miConfigurador->getVariableConfiguracion ( "rutaUrlBloque" );
+?>
+
+
 		<div id="sliderFrame">
         <div id="slider">
-            <img src="img/slid1.jpg" alt="" />
-            <img src="img/slid2.jpg" alt="Pure Javascript. No jQuery. No flash." />
-            <img src="img/slid3.jpg" alt="#htmlcaption" />
-            <img src="img/slid4.jpg" />
+            <img src="<?php echo $rutaUrlBloque.'css/img/slid1.png'?>" alt="" />
+            <img src="<?php echo $rutaUrlBloque.'css/img/slid2.jpg'?>" alt="Pure Javascript. No jQuery. No flash." />
+            <img src="<?php echo $rutaUrlBloque.'css/img/slid3.jpg'?>" alt="#htmlcaption" />
+            <img src="<?php echo $rutaUrlBloque.'css/img/slid4.jpg'?>" alt="" />
         </div><div style="opacity: 1;" class="fade-in-forward" id="stage">
 			<div class="sign-in">
 				<div id="main-content" class="card">
-					
+
 					<div style="opacity: 1;" class="fade-in-forward" id="udistrital-logo"></div>
-					
+
 					<header>
 						<h1 id="fxa-signin-header">
 							Red de Monitoreo de Condiciones Ambientales <span class="service">Ingrese sus datos</span></h1>
 					</header>
-				
-    
-					
-					
+
+
+
+
 					<section>
 
 						<div class="error"></div>
@@ -41,14 +46,14 @@
         $tab = 1;
         // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
         // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
-		$atributos ['tipoEtiqueta'] = 'inicio';
+				$atributos ['tipoEtiqueta'] = 'inicio';
         echo $this->miFormulario->formulario ( $atributos );
-		
+
 		?>
-		
+
 							<div class="input-row">
-								<?php
-				$esteCampo = 'usuario';
+							<?php
+								$esteCampo = 'usuario';
                 $atributos ['id'] = $esteCampo;
                 $atributos ['nombre'] = $esteCampo;
                 $atributos ['tipo'] = 'text';
@@ -77,8 +82,8 @@
 							</div>
 
 							<div class="input-row password-row">
-								<?php
-				$esteCampo = 'clave';
+						<?php
+								$esteCampo = 'clave';
                 $atributos ['id'] = $esteCampo;
                 $atributos ['nombre'] = $esteCampo;
                 $atributos ['tipo'] = 'password';
@@ -103,7 +108,7 @@
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->campoCuadroTexto($atributos);
                 unset($atributos);
-								?>
+					?>
 							</div>
 
 							<div class="button-row">
@@ -122,7 +127,7 @@
         /**
          * SARA permite que los nombres de los campos sean dinámicos.
          * Para ello utiliza la hora en que es creado el formulario para
-         * codificar el nombre de cada campo. 
+         * codificar el nombre de cada campo.
          */
         $valorCodificado .= "&campoSeguro=" . $_REQUEST['tiempo'];
         // Paso 2: codificar la cadena resultante
@@ -143,15 +148,13 @@
         $atributos ['marco'] = true;
         $atributos ['tipoEtiqueta'] = 'fin';
         echo $this->miFormulario->formulario ( $atributos );
-        
+
         $directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
         $directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
         $directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
-        
+
         $enlace = 'pagina=registroUsuario';
         $enlace = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $enlace, $directorio );
-        
-
 	?>
 
 						<div class="links">

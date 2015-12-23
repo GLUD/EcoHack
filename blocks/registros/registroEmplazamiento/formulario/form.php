@@ -1,12 +1,3 @@
-		<div id='cssmenu'>
-</div>
-
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-
-			
-					<section>
-
-		
 <?php
 //namespace registros\registroEmplazamiento\formulario;
 
@@ -19,33 +10,33 @@ class FormularioRegistro {
 	var $lenguaje;
 	var $miFormulario;
 	var $miSql;
-	
+
 	function __construct($lenguaje, $formulario, $sql) {
-		
+
 		$this->miConfigurador = \Configurador::singleton ();
-		
+
 		$this->miConfigurador->fabricaConexiones->setRecursoDB ( 'principal' );
 		$this->lenguaje = $lenguaje;
-		
+
 		$this->miFormulario = $formulario;
-		
-		$this->miSql = $sql;		
+
+		$this->miSql = $sql;
 	}
-	
+
 	function formulario() {
-		
+
 		/**
 		 * IMPORTANTE: Este formulario está utilizando jquery.
 		 * Por tanto en el archivo ready.php se delaran algunas funciones js
 		 * que lo complementan.
 		 */
-		
+
 		$conexion = "modelo";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-		
+
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
-		
+
 		// ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
 		/**
 		 * Atributos que deben ser aplicados a todos los controles de este formulario.
@@ -57,40 +48,40 @@ class FormularioRegistro {
 		 */
 		$atributosGlobales ['campoSeguro'] = 'true';
 		$_REQUEST ['tiempo'] = time ();
-		
+
 		// -------------------------------------------------------------------------------------------------
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre']."Registrar";
 		$atributos ['id'] = $esteCampo;
 		$atributos ['nombre'] = $esteCampo;
-		
+
 		// Si no se coloca, entonces toma el valor predeterminado 'application/x-www-form-urlencoded'
 		$atributos ['tipoFormulario'] = 'multipart/form-data';
-		
+
 		// Si no se coloca, entonces toma el valor predeterminado 'POST'
 		$atributos ['metodo'] = 'POST';
-		
+
 		// Si no se coloca, entonces toma el valor predeterminado 'index.php' (Recomendado)
 		$atributos ['action'] = 'index.php';
 		$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo );
-		
+
 		// Si no se coloca, entonces toma el valor predeterminado.
 		$atributos ['estilo'] = '';
 		$atributos ['marco'] = true;
 		$tab = 1;
-		
+
 		// ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
-		
+
 		// ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
-		
+
 		$atributos ['tipoEtiqueta'] = 'inicio';
 				// Aplica atributos globales al control
 		echo $this->miFormulario->formulario ( $atributos );
 
-					
-			
+
+
 		// ----------------INICIO CONTROL: Lista Tipo de Emplazamiento--------------------------------------------------------
-			
+
 		$esteCampo = 'id_tipo_emplazamiento';
 		$atributos ['nombre'] = $esteCampo;
 		$atributos ['id'] = $esteCampo;
@@ -127,14 +118,14 @@ class FormularioRegistro {
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroLista ( $atributos );
 		unset ( $atributos );
-			
+
 		// ----------------FIN CONTROL: Lista Tipo de Emplazamiento--------------------------------------------------------
-				
-				
-					
+
+
+
 		// ----------------INICIO CONTROL: Campo de insertar imagen--------------------------------------------------------
-		
-		$esteCampo = 'foto'; 
+
+		$esteCampo = 'foto';
 		$atributos ['id'] = $esteCampo;
 		$atributos ['nombre'] = $esteCampo;
 		$atributos ['tipo'] = 'text';
@@ -147,7 +138,7 @@ class FormularioRegistro {
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 		$atributos ['validar'] = 'required, minSize[10],maxSize[30]';
-			
+
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
 		} else {
@@ -159,7 +150,7 @@ class FormularioRegistro {
 		$atributos ['maximoTamanno'] = '30';
 		$atributos ['anchoEtiqueta'] = 280;
 		$tab ++;
-			
+
 		// Aplica atributos globales al control
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
@@ -180,7 +171,7 @@ class FormularioRegistro {
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 		$atributos ['validar'] = 'required, custom[onlyNumberSp], maxSize[15]';
-			
+
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
 		} else {
@@ -192,13 +183,13 @@ class FormularioRegistro {
 		$atributos ['maximoTamanno'] = '15';
 		$atributos ['anchoEtiqueta'] = 280;
 		$tab ++;
-			
+
 		// Aplica atributos globales al control
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		unset ( $atributos );
 		// ----------------FIN CONTROL: Campo de Texto id dispositivo--------------------------------------------------------
-			
+
 		// ----------------INICIO CONTROL: Campo de Texto descripción--------------------------------------------------------
 		$esteCampo = 'descripcion';
 		$atributos ['id'] = $esteCampo;
@@ -213,7 +204,7 @@ class FormularioRegistro {
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 		$atributos ['validar'] = 'required, maxSize[15]';
-			
+
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
 		} else {
@@ -225,16 +216,16 @@ class FormularioRegistro {
 		$atributos ['maximoTamanno'] = '15';
 		$atributos ['anchoEtiqueta'] = 280;
 		$tab ++;
-			
+
 		// Aplica atributos globales al control
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		unset ( $atributos );
 		// ----------------FIN CONTROL: Campo de Texto descripción--------------------------------------------------------
-			
-		
-				
-				
+
+
+
+
 				// ------------------Division para los botones-------------------------
 				$atributos ["id"] = "botones";
 				$atributos ["estilo"] = "marcoBotones";
@@ -255,19 +246,19 @@ class FormularioRegistro {
 					$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
 					$atributos ['nombreFormulario'] = $esteBloque ['nombre']."Registrar";
 					$tab ++;
-					
+
 					// Aplica atributos globales al control
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->campoBoton ( $atributos );
-					
+
 					// -----------------FIN CONTROL: Botón -----------------------------------------------------------
 				}
 	// 			------------------Fin Division para los botones-------------------------
 				echo $this->miFormulario->division( "fin" );
-				
-				
+
+
 				// ------------------- SECCION: Paso de variables ------------------------------------------------
-				
+
 				/**
 				 * En algunas ocasiones es útil pasar variables entre las diferentes páginas.
 				 * SARA permite realizar esto a través de tres
@@ -280,13 +271,13 @@ class FormularioRegistro {
 				 */
 				// En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
 				// Paso 1: crear el listado de variables
-				
+
 				$valorCodificado  = "action=" . $esteBloque ["nombre"];
 				$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 				$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 				$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 				$valorCodificado .= "&opcion=registrar";
-				
+
 				/**
 				 * SARA permite que los nombres de los campos sean dinámicos.
 				 * Para ello utiliza la hora en que es creado el formulario para
@@ -301,10 +292,10 @@ class FormularioRegistro {
 				 * La función $this->miFormulario->codificarCampos() codifica automáticamente el atributo validadorCampos
 				 */
 				//$valorCodificado .= "&validadorCampos=" . $this->miFormulario->codificarCampos();
-				
+
 				// Paso 2: codificar la cadena resultante
 				$valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar ( $valorCodificado );
-				
+
 				$atributos ["id"] = "formSaraData"; // No cambiar este nombre
 				$atributos ["tipo"] = "hidden";
 				$atributos ['estilo'] = '';
@@ -314,29 +305,29 @@ class FormularioRegistro {
 				$atributos ["valor"] = $valorCodificado;
 				echo $this->miFormulario->campoCuadroTexto ( $atributos );
 				unset ( $atributos );
-				
+
 				$atributos ['marco'] = true;
 				$atributos ['tipoEtiqueta'] = 'fin';
 				echo $this->miFormulario->formulario ( $atributos );
-								
+
 				// ----------------FIN SECCION: Paso de variables -------------------------------------------------
 				// ---------------- FIN SECCION: Controles del Formulario -------------------------------------------
 			// ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
 			// Se debe declarar el mismo atributo de marco con que se inició el formulario.
-		
+
 	}
 	function mensaje() {
-		
+
 		// Si existe algun tipo de error en el login aparece el siguiente mensaje
 		$mensaje = $this->miConfigurador->getVariableConfiguracion ( 'mostrarMensaje' );
 		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', null );
-		
+
 		if ($mensaje) {
-			
+
 			$tipoMensaje = $this->miConfigurador->getVariableConfiguracion ( 'tipoMensaje' );
-			
+
 			if ($tipoMensaje == 'json') {
-				
+
 				$atributos ['mensaje'] = $mensaje;
 				$atributos ['json'] = true;
 			} else {
@@ -352,7 +343,7 @@ class FormularioRegistro {
 			echo $this->miFormulario->campoMensaje ( $atributos );
 			unset ( $atributos );
 		}
-		
+
 		return true;
 	}
 }
@@ -363,9 +354,3 @@ $miFormulario = new FormularioRegistro ( $this->lenguaje, $this->miFormulario, $
 $miFormulario->formulario ();
 $miFormulario->mensaje ();
 ?>
-</section>
-		</div>
-		<!--[if !(IE) | (gte IE 10)]><!-->
-		<noscript>
-			SGA necesita Javascript.
-		</noscript>

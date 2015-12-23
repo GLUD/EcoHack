@@ -12,19 +12,19 @@ class Form {
 	var $lenguaje;
 	var $miFormulario;
 	var $site;
-	
+
 	function __construct($lenguaje, $formulario) {
-		$this -> miConfigurador = \Configurador::singleton();
-		
-		$this -> miInspectorHTML = \InspectorHTML::singleton();
+		$this->miConfigurador = \Configurador::singleton();
 
-		$this -> miConfigurador -> fabricaConexiones -> setRecursoDB('principal');
+		$this->miInspectorHTML = \InspectorHTML::singleton();
 
-		$this -> lenguaje = $lenguaje;
+		$this->miConfigurador -> fabricaConexiones -> setRecursoDB('principal');
 
-		$this -> miFormulario = $formulario;
-		
-		$this -> site = $this->miConfigurador->getVariableConfiguracion ( "rutaBloque" );
+		$this->lenguaje = $lenguaje;
+
+		$this->miFormulario = $formulario;
+
+		$this->site = $this->miConfigurador->getVariableConfiguracion ( "rutaBloque" );
 	}
 
 	function miForm() {
@@ -35,22 +35,22 @@ class Form {
 	function mensaje() {
 
 		// Si existe algun tipo de error en el login aparece el siguiente mensaje
-		$mensaje = $this -> miConfigurador -> getVariableConfiguracion('mostrarMensaje');
-		$this -> miConfigurador -> setVariableConfiguracion('mostrarMensaje', null);
+		$mensaje = $this->miConfigurador -> getVariableConfiguracion('mostrarMensaje');
+		$this->miConfigurador -> setVariableConfiguracion('mostrarMensaje', null);
 
 		if ($mensaje) {
-			$tipoMensaje = $this -> miConfigurador -> getVariableConfiguracion('tipoMensaje');
+			$tipoMensaje = $this->miConfigurador -> getVariableConfiguracion('tipoMensaje');
 			if ($tipoMensaje == 'json') {
 
 				$atributos['mensaje'] = $mensaje;
 				$atributos['json'] = true;
 			} else {
-				$atributos['mensaje'] = $this -> lenguaje -> getCadena($mensaje);
+				$atributos['mensaje'] = $this->lenguaje -> getCadena($mensaje);
 			}
 			// ------------------Division para los botones-------------------------
 			$atributos['id'] = 'divMensaje';
 			$atributos['estilo'] = 'marcoBotones';
-			echo $this -> miFormulario -> division("inicio", $atributos);
+			echo $this->miFormulario -> division("inicio", $atributos);
 
 			// -------------Control texto-----------------------
 			$esteCampo = 'mostrarMensaje';
@@ -59,17 +59,17 @@ class Form {
 			$atributos["etiqueta"] = '';
 			$atributos["columnas"] = '';
 			// El control ocupa 47% del tamaño del formulario
-			echo $this -> miFormulario -> campoMensaje($atributos);
+			echo $this->miFormulario -> campoMensaje($atributos);
 			unset($atributos);
 
 			// ------------------Fin Division para los botones-------------------------
-			echo $this -> miFormulario -> division("fin");
+			echo $this->miFormulario -> division("fin");
 		}
 	}
 
 }
 
-$miSeleccionador = new Form($this -> lenguaje, $this -> miFormulario);
+$miSeleccionador = new Form($this->lenguaje, $this->miFormulario);
 
 $miSeleccionador -> mensaje();
 
