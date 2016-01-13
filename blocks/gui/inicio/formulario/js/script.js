@@ -44,7 +44,3 @@ function abrirEventoPanelPorId(id){
 
 
 
-
-
-
-

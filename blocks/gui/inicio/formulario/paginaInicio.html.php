@@ -2,14 +2,8 @@
 $rutaUrlBloque = $this->miConfigurador->getVariableConfiguracion ( "rutaUrlBloque" );
 ?>
 
-
 		<div id="sliderFrame">
-        <div id="slider">
-            <img src="<?php echo $rutaUrlBloque.'css/img/slid1.png'?>" alt="" />
-            <img src="<?php echo $rutaUrlBloque.'css/img/slid2.jpg'?>" alt="Pure Javascript. No jQuery. No flash." />
-            <img src="<?php echo $rutaUrlBloque.'css/img/slid3.jpg'?>" alt="#htmlcaption" />
-            <img src="<?php echo $rutaUrlBloque.'css/img/slid4.jpg'?>" alt="" />
-        </div><div style="opacity: 1;" class="fade-in-forward" id="stage">
+        <div style="opacity: 1;" class="fade-in-forward" id="stage">
 			<div class="sign-in">
 				<div id="main-content" class="card">
 
@@ -210,3 +204,10 @@ $rutaUrlBloque = $this->miConfigurador->getVariableConfiguracion ( "rutaUrlBloqu
 		<noscript>
 			SGA necesita Javascript.
 		</noscript>
+		<ul class="bxslider">
+            <li><img src="<?php echo $rutaUrlBloque.'css/img/slid1.png'?>" alt="" /></li>
+            <li><img src="<?php echo $rutaUrlBloque.'css/img/slid2.jpg'?>" alt="Pure Javascript. No jQuery. No flash." /></li>
+            <li><img src="<?php echo $rutaUrlBloque.'css/img/slid3.jpg'?>" alt="#htmlcaption" /></li>
+            <li><img src="<?php echo $rutaUrlBloque.'css/img/slid4.jpg'?>" alt="" /></li>
+        </ul>
+

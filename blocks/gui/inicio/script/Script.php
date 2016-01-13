@@ -10,6 +10,9 @@
 
 $indice=-1;
 $funcion[$indice++]='script.js';
+$funcion[$indice++]='jquery.bxslider.js';
+
+//$funcion[$indice++]='js-image-slider.js';
 //$funcion = array();
 
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
