@@ -110,6 +110,8 @@ class FormularioRegistro {
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 		$atributos ['validar'] = 'required, maxSize[200]';
 		$atributos ['textoFondo'] = 'Ingrese Mínimo 3 Caracteres de Búsqueda';
+		$atributos ['validar'] = 'required';
+		
 			
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -161,6 +163,8 @@ class FormularioRegistro {
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 		$atributos ['validar'] = 'required, minSize[6],maxSize[200]';
+		$atributos ['validar'] = 'required';
+		
 			
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -195,6 +199,7 @@ class FormularioRegistro {
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 		$atributos ['validar'] = 'required, minSize[10],maxSize[30]';
+		
 			
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -251,6 +256,36 @@ class FormularioRegistro {
 		$esteCampo = 'imagen';
 		$atributos ['id'] = $esteCampo;
 		$atributos ['nombre'] = $esteCampo;
+		$atributos ['tipo'] = 'file';
+		$atributos ['estilo'] = 'jqueryui';
+		$atributos ['marco'] = true;
+		$atributos ['estiloMarco'] = '';
+		$atributos ["etiquetaObligatorio"] = true;
+		$atributos ['columnas'] = 1;
+		$atributos ['dobleLinea'] = 0;
+		$atributos ['tabIndex'] = $tab;
+		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['validar'] = 'required, maxSize[15]';
+			
+		if (isset ( $_REQUEST [$esteCampo] )) {
+			$atributos ['valor'] = $_REQUEST [$esteCampo];
+		} else {
+			$atributos ['valor'] = '';
+		}
+		$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+		$atributos ['deshabilitado'] = false;
+		$atributos ['anchoEtiqueta'] = 280;
+		$tab ++;
+			
+		// Aplica atributos globales al control
+		$atributos = array_merge ( $atributos, $atributosGlobales );
+		echo $this->miFormulario->campoCuadroTexto ( $atributos );
+		unset ( $atributos );
+		
+				// ----------------INICIO CONTROL: Campo de imagen--------------------------------------------------------
+		$esteCampo = 'clave';
+		$atributos ['id'] = $esteCampo;
+		$atributos ['nombre'] = $esteCampo;
 		$atributos ['tipo'] = 'text';
 		$atributos ['estilo'] = 'jqueryui';
 		$atributos ['marco'] = true;
@@ -279,36 +314,7 @@ class FormularioRegistro {
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		unset ( $atributos );
 		// ----------------FIN CONTROL: Campo de imagen--------------------------------------------------------
-		
-		$esteCampo = 'clave';
-                $atributos ['id'] = $esteCampo;
-                $atributos ['nombre'] = $esteCampo;
-                $atributos ['tipo'] = 'password';
-                $atributos ['estilo'] = 'login jqueryui';
-                $atributos ['marco'] = false;
-                $atributos ['columnas'] = 1;
-                $atributos ['dobleLinea'] = false;
-                $atributos ['tabIndex'] = $tab;
-                $atributos ['textoFondo'] = $this->lenguaje->getCadena($esteCampo);
-                $atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		        $atributos ['validar'] = 'required';
-                if (isset($_REQUEST [$esteCampo])) {
-                    $atributos ['valor'] = $_REQUEST [$esteCampo];
-                } else {
-                    $atributos ['valor'] = '';
-                }
-                $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-                $atributos ['deshabilitado'] = false;
-                $atributos ['tamanno'] = 20;
-                $atributos ['maximoTamanno'] = '10';
-                $tab ++;
-                // Aplica atributos globales al control
-                $atributos = array_merge($atributos, $atributosGlobales);
-                echo $this->miFormulario->campoCuadroTexto($atributos);
-                unset($atributos);
 				
-		
-		
 			
 		// ----------------INICIO CONTROL: Campo de imagen--------------------------------------------------------
 		$esteCampo = 'nickname';

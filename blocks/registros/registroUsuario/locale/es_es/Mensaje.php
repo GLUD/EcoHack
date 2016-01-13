@@ -11,7 +11,7 @@ $this->idioma["imagen"] = "Imagen:";
 $this->idioma["clave"] = "Contraseña:";
 $this->idioma["nickname"] = "Nickname:";
 $this->idioma["botonRegistrar"] = "Registrar Usuario";
-$this->idioma["clave"] = "Clave:";
+$this->idioma["botonimagen"] = "subir foto";
 $this->idioma["accesoIncorrecto"] = "";
 $this->idioma["accesoIncorrecto"] = "";
 ?>

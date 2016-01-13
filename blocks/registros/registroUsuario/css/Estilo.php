@@ -15,9 +15,14 @@ echo '<!-- Latest compiled and minified CSS -->
 
 echo '<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />';
 
-$estilo = array();
-$estilo [$indice++] = "style.css";
+
 //$estilo = array();
+$estilo [$indice++] = "styler.css";
+$estilo[$indice++]="timepicker.css";
+$estilo[$indice++]="validationEngine.jquery.css";
+$estilo[$indice++]="jquery.auto-complete.css";
+$estilo[$indice++]="select2.css";
+$estilo[$indice++]="miestilo.css";
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" );
