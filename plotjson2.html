@@ -55,12 +55,12 @@ suelos=[];
 $(document).ready(function () {
     $.ajax({
         type: "GET",
-        url: "/index.php?data=0Ihzhj0geg_u16zk9AJNLlGl9F-9kE_bxeocU3n_RBP5wEjnCcVOxQcuHGNFpP0sVwz_ro6jSMnoD6NTVWCbeg&limit=10"
+        url: "/index.php?data=c1FJdWErVldhbFlkY2RkOGxlbzE5a0JZTmlLNFZPVTVNQlRHZ2hjU3Q1NDhxbktneGtib3d1NXY0d3RsTnE5eklCcHB2OEVaUnQvZ2ZoR0RvWXgvN1JKaTVBPT0&limit=12"
     })
     .done(function (msg) {
         respuesta = msg;
      dato = JSON.parse(msg);
-     obj = JSON.parse(text);
+     
         for (var i = 0; i < dato.length; i++) {
 			temperaturas.push(parseInt(dato[i].temperatura));
            // console.log(dato[i].temperatura);
