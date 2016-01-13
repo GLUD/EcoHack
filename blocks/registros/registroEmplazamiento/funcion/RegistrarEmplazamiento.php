@@ -1,5 +1,4 @@
 <?php
-
 namespace registros\registroEmplazamiento\funcion;
 
 use registros\registroEmplazamiento\funcion\redireccionar;

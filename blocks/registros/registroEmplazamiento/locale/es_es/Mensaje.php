@@ -10,5 +10,9 @@ $this->idioma["id_dispositivo"] = "Número dispositivo:";
 $this->idioma["descripcion"] = "Descripción:";
 $this->idioma["botonRegistrar"] = "Registrar Emplazamiento";
 $this->idioma["accesoIncorrecto"] = "";
+$this->idioma["botonimagen"] = "subir foto";
+$this->idioma["accesoIncorrecto"] = "";
+$this->idioma["accesoIncorrecto"] = "";
+
 
 ?>

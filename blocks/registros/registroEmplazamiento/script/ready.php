@@ -2,23 +2,21 @@
 <?php
 $nombrePagina = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 $nombreBloque = $this->miConfigurador->getVariableConfiguracion ( 'esteBloque' )['nombre'];
+
+// $("#").submit(function() {
+// 	$resultado=$("#novedadesBonificacion").validationEngine("validate");
+// 	if ($resultado) {
+// 		return true;
+// 	}
+// 	return false;
+// });
 ?>
 
 $("#<?php echo $nombreBloque.'Registrar';?>").validationEngine({
-promptPosition : "bottomRight:-150",
-scroll: false,
-autoHidePrompt: true,
-autoHideDelay: 2000
-});
-
-$(function() {
-	$("#<?php echo $nombreBloque.'Registrar';?>").submit(function() {
-		$resultado=$("#novedadesBonificacion").validationEngine("validate");
-		if ($resultado) {
-			return true;
-		}
-		return false;
-	});
+	promptPosition : "bottomRight:-150",
+	scroll: false,
+	autoHidePrompt: true,
+	autoHideDelay: 2000
 });
 
 // Asociar el widget de validación al formulario

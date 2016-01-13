@@ -7,6 +7,11 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+
+
+
+
 #cssmenu {
   background: #f96e5b;
   width: auto;
@@ -102,81 +107,5 @@
 }
 #cssmenu.align-right li:first-child a:after {
   display: none;
-}
-
-
-#tabudistrital::before {
-    background-color: #0c99d5;
-    color: #0c99d5;
-}
-
-#tabudistrital1{
-    background-color: #0c99d5;
-    right:0;
-    color: #0c99d5;
-}
-
-#tabudistrital {
-    background-color: transparent;
-    content: "";
-    z-index: 1;
-    color: #0c99d5;
-    
-}
-#tabudistrital {
-    
-    position: absolute;
-    right:10px;
-    top: 14px;
-}
-#tabudistrital {
-    float: right;
-}
-#tabudistrital a {
-    background-image: url("img/tab.png");
-    background-repeat: no-repeat;
-    display: block;
-    height: 36px;
-    overflow: hidden;
-    position: relative;
-    text-indent: 120%;
-    white-space: nowrap;
-    width: 147px;
-    z-index: 2;
-}
-#marcoGeneral{
-	width: 100%;
-}
-
-
-@media (max-width: 600px) {
-  form > div {
-    margin: 0 0 15px 0; 
-  }
-  form > div > label,
-  legend {
-	  width: 100%;
-    float: none;
-    margin: 0 0 5px 0;
-  }
-  form > div > div,
-  form > div > fieldset > div {
-    width: 100%;
-    float: none;
-  }
-  input[type=text],
-  input[type=email],
-  input[type=url],
-  input[type=password],
-  textarea,
-  select {
-    width: 100%; 
-  }
-}
-@media (min-width: 1200px) {
-  form > div > label,
-	legend {
-  	text-align: right;
-  }
 }
 

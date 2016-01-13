@@ -86,7 +86,7 @@ class FormularioRegistro {
 		$atributos ['nombre'] = $esteCampo;
 		$atributos ['id'] = $esteCampo;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ["etiquetaObligatorio"] = true;
+		$atributos ['etiquetaObligatorio'] = true;
 		$atributos ['tab'] = $tab ++;
 		$atributos ['anchoEtiqueta'] = 280;
 		$atributos ['evento'] = '';
@@ -102,9 +102,11 @@ class FormularioRegistro {
 		$atributos ['ajax_control'] = $esteCampo;
 		$atributos ['estilo'] = "jqueryui";
 		$atributos ['limitar'] = true;
-		$atributos ['anchoCaja'] = 57;
+		//$atributos ['anchoCaja'] = 57;
 		$atributos ['miEvento'] = '';
-		$atributos ['validar'] = 'required';
+		//$atributos ['validar'] = 'required';
+		$atributos ['validar'] = 'required, maxSize[200]';
+
 		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( 'tipo_emplazamiento' );
 		$matrizItems = array (
 				array (
@@ -112,6 +114,18 @@ class FormularioRegistro {
 						' '
 				)
 		);
+		if (isset ( $_REQUEST [$esteCampo] )) {
+			$atributos ['valor'] = $_REQUEST [$esteCampo];
+		} else {
+			$atributos ['valor'] = '';
+		}
+		$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+		$atributos ['deshabilitado'] = false;
+		//$atributos ['tamanno'] = 57;
+		$atributos ['maximoTamanno'] = '30';
+		$atributos ['anchoEtiqueta'] = 280;
+		$tab ++;
+		
 		$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 		$atributos ['matrizItems'] = $matrizItems;
 		// Aplica atributos globales al control
@@ -128,16 +142,17 @@ class FormularioRegistro {
 		$esteCampo = 'foto';
 		$atributos ['id'] = $esteCampo;
 		$atributos ['nombre'] = $esteCampo;
-		$atributos ['tipo'] = 'text';
+		$atributos ['tipo'] = 'file';
 		$atributos ['estilo'] = 'jqueryui';
 		$atributos ['marco'] = true;
 		$atributos ['estiloMarco'] = '';
-		$atributos ["etiquetaObligatorio"] = true;
+		$atributos ['etiquetaObligatorio'] = true;
 		$atributos ['columnas'] = 1;
 		$atributos ['dobleLinea'] = 0;
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['validar'] = 'required, minSize[10],maxSize[30]';
+		$atributos ['validar'] = 'required';
+		//$atributos ['validar'] = 'required';
 
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -156,7 +171,7 @@ class FormularioRegistro {
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		unset ( $atributos );
 		// ----------------FIN CONTROL: Campo de insertar imagen--------------------------------------------------------
-
+	
 		// ----------------INICIO CONTROL: Campo de Texto id dispositivo--------------------------------------------------------
 		$esteCampo = 'id_dispositivo';
 		$atributos ['id'] = $esteCampo;
@@ -165,7 +180,7 @@ class FormularioRegistro {
 		$atributos ['estilo'] = 'jqueryui';
 		$atributos ['marco'] = true;
 		$atributos ['estiloMarco'] = '';
-		$atributos ["etiquetaObligatorio"] = true;
+		$atributos ['etiquetaObligatorio'] = true;
 		$atributos ['columnas'] = 1;
 		$atributos ['dobleLinea'] = 0;
 		$atributos ['tabIndex'] = $tab;
@@ -198,7 +213,7 @@ class FormularioRegistro {
 		$atributos ['estilo'] = 'jqueryui';
 		$atributos ['marco'] = true;
 		$atributos ['estiloMarco'] = '';
-		$atributos ["etiquetaObligatorio"] = true;
+		$atributos ['etiquetaObligatorio'] = true;
 		$atributos ['columnas'] = 1;
 		$atributos ['dobleLinea'] = 0;
 		$atributos ['tabIndex'] = $tab;
@@ -354,3 +369,10 @@ $miFormulario = new FormularioRegistro ( $this->lenguaje, $this->miFormulario, $
 $miFormulario->formulario ();
 $miFormulario->mensaje ();
 ?>
+
+	</section>
+		</div>
+		<!--[if !(IE) | (gte IE 10)]><!-->
+		<noscript>
+			SGA necesita Javascript.
+		</noscript>
