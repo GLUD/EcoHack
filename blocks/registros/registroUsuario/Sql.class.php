@@ -182,7 +182,7 @@ class Sql extends \Sql {
 				$cadenaSql.=" '" . $variable ['apellido'] . "',";
 				$cadenaSql.=" '" . $variable ['correo'] . "',";
 				$cadenaSql.=" '" . $variable ['telefono'] . "',";
-				//$cadenaSql.=" '" . $variable ['imagen'] . "',";
+				$cadenaSql.=" '" . $variable ['imagen'] . "',";
 				$cadenaSql.=" '" . $variable ['clave'] . "',";
 				$cadenaSql.=" '" . $variable ['nickname'] ."'";
 				$cadenaSql.=" ) ;";
